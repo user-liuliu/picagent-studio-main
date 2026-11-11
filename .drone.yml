@@ -1,0 +1,73 @@
+kind: pipeline
+type: docker
+name: pic-agent-suite-workbench-deploy
+
+trigger:
+  event:
+    - tag
+
+volumes:
+  - name: docker-sock
+    host:
+      path: /var/run/docker.sock
+
+  - name: deploy-config
+    host:
+      path: /opt/pic-agent
+
+  - name: control-gateway-tools
+    host:
+      path: /opt/control
+
+steps:
+  - name: verify
+    image: node:22-alpine
+    commands:
+      - npm ci
+      - npm run typecheck
+      - npm run test:ticket02
+      - npm run test:ticket05
+      - npx tsx --test tests/image-editor.contract.test.ts tests/ticket06.task-contract.test.ts tests/workbench-ui.ticket08.test.ts
+      - npm run build
+
+  - name: build-image
+    image: docker:24-cli
+    volumes:
+      - name: docker-sock
+        path: /var/run/docker.sock
+    commands:
+      - echo "Building pic-agent:${DRONE_TAG}"
+      - docker build -t "pic-agent:${DRONE_TAG}" .
+      - docker tag "pic-agent:${DRONE_TAG}" pic-agent:latest
+
+  - name: deploy
+    image: docker:24-cli
+    volumes:
+      - name: docker-sock
+        path: /var/run/docker.sock
+      - name: deploy-config
+        path: /deploy/pic-agent
+      - name: control-gateway-tools
+        path: /deploy/control
+    commands:
+      - test -f /deploy/pic-agent/.env
+      - test -x /deploy/control/deploy/configure-app-gateway.sh
+      - docker network inspect control-network >/dev/null 2>&1 || docker network create control-network
+      - docker rm -f pic-agent >/dev/null 2>&1 || true
+      - docker run -d --name pic-agent --restart unless-stopped --network control-network --env-file /deploy/pic-agent/.env -e HOST=0.0.0.0 -e PORT=3001 -p 127.0.0.1:3001:3001 -p 127.0.0.1:9464:9464 "pic-agent:${DRONE_TAG}"
+      - |
+        set -eu
+        for attempt in $(seq 1 30); do
+          if docker exec pic-agent node -e "fetch('http://127.0.0.1:3001/api/health').then(response => process.exit(response.ok ? 0 : 1)).catch(() => process.exit(1))"; then
+            break
+          fi
+          if [ "$attempt" = 30 ]; then
+            docker inspect --format='{{.State.Status}} {{.State.ExitCode}}' pic-agent || true
+            docker logs --tail=300 pic-agent || true
+            echo "pic-agent health check failed"
+            exit 1
+          fi
+          sleep 2
+        done
+      - docker run --rm --privileged --pid=host --network=host -v /:/host alpine:3.21 chroot /host /opt/control/deploy/configure-app-gateway.sh upsert pic-agent 3002 3001 "${CONTROL_PUBLIC_URL:-http://185.61.210.32/}"
+      - docker port pic-agent

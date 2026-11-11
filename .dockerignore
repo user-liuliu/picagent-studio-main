@@ -1,0 +1,16 @@
+.git
+.env
+.env.*
+!.env.example
+node_modules
+dist
+build
+coverage
+var
+output
+artifacts
+.scratch
+.playwright-cli
+playwright-report
+test-results
+*.tsbuildinfo

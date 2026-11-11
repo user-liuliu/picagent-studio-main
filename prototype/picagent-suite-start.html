@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:,">
+  <title>套图创建 · PicAgent</title>
+  <link rel="stylesheet" href="assets/suite-start.css">
+</head>
+<body>
+  <div class="start-shell">
+    <header class="start-topbar">
+      <a class="start-brand" href="index.html" aria-label="返回 PicAgent 原型入口"><span>PA</span><strong>PicAgent</strong></a>
+      <div class="start-context"><span>内部图片生产</span><i>/</i><strong>新建套图</strong></div>
+      <div class="start-top-actions"><span class="start-sync"><b></b>资料源已同步</span><button class="start-avatar" type="button" aria-label="当前用户沈">沈</button></div>
+    </header>
+
+    <aside class="start-sidebar" aria-label="主导航">
+      <a class="start-nav active" href="picagent-suite-start.html"><svg><use href="assets/icons.svg#sparkles"></use></svg><span>创建</span></a>
+      <a class="start-nav" href="picagent-task-center.html"><svg><use href="assets/icons.svg#tasks"></use></svg><span>任务</span></a>
+      <a class="start-nav" href="picagent-style-library.html"><svg><use href="assets/icons.svg#library"></use></svg><span>风格库</span></a>
+      <span class="start-nav-spacer"></span>
+      <a class="start-nav" href="index.html"><svg><use href="assets/icons.svg#arrow-right"></use></svg><span>原型页</span></a>
+    </aside>
+
+    <main class="start-main">
+      <section class="start-heading">
+        <div><p class="start-eyebrow">CREATE FROM EVIDENCE</p><h1>从商品实拍到套图方案</h1><p>先确认产品真实外观，再用模板、商品资料与设计要求组装本次生成简报。</p></div>
+        <div class="start-heading-meta"><span>产品</span><strong>GAN65-BK</strong><span>站点</span><strong>Amazon · 日本</strong></div>
+      </section>
+
+      <nav class="start-mode-strip" aria-label="创作模式">
+        <button class="active" type="button" aria-current="page"><svg><use href="assets/icons.svg#columns"></use></svg><span>套图模式</span><small>当前可用</small></button>
+        <button type="button" data-reserved-mode="全能模式"><svg><use href="assets/icons.svg#sparkles"></use></svg><span>全能模式</span><small>接口预留</small></button>
+        <button type="button" data-reserved-mode="单图模式"><svg><use href="assets/icons.svg#editor"></use></svg><span>单图模式</span><small>接口预留</small></button>
+        <button type="button" data-reserved-mode="视频模式"><svg><use href="assets/icons.svg#eye"></use></svg><span>视频模式</span><small>接口预留</small></button>
+        <button type="button" data-reserved-mode="多配多"><svg><use href="assets/icons.svg#merge"></use></svg><span>多配多</span><small>接口预留</small></button>
+        <button type="button" data-reserved-mode="SKU 套装"><svg><use href="assets/icons.svg#layers"></use></svg><span>SKU 套装</span><small>接口预留</small></button>
+        <button type="button" data-reserved-mode="替换模式"><svg><use href="assets/icons.svg#history"></use></svg><span>替换模式</span><small>接口预留</small></button>
+      </nav>
+
+      <section class="start-studio" aria-label="套图生成准备">
+        <section class="start-evidence" aria-labelledby="evidence-title">
+          <header class="start-section-head"><div><p class="start-eyebrow">PRODUCT EVIDENCE</p><h2 id="evidence-title">商品图对比</h2></div><span class="start-step-badge">01 · 底图准备</span></header>
+          <div class="start-compare-stack">
+            <article class="start-image-card source">
+              <div class="start-image-label"><span>原始实拍图</span><em>SOURCE</em></div>
+              <img src="assets/gan65-product-tight.jpg" alt="GAN65-BK 原始实拍图">
+              <footer><div><strong>GAN65-BK-source-01.jpg</strong><span>商品主体与接口结构锁定</span></div><button type="button" data-replace-image>替换</button></footer>
+            </article>
+            <div class="start-transform-line" aria-label="自动精修流程"><span><svg><use href="assets/icons.svg#sparkles"></use></svg></span><div><strong>AI 自动精修</strong><small>去除环境干扰，不改变商品结构</small></div><em>已完成</em></div>
+            <article class="start-image-card clean">
+              <div class="start-image-label"><span>精修白底图</span><em>CLEAN BASE</em></div>
+              <img src="assets/gan65-product.jpg" alt="GAN65-BK 精修白底图">
+              <footer><div><strong>精修底图 V1</strong><span>可作为整套图片的统一商品依据</span></div><button type="button" data-refine-image>重新精修</button></footer>
+            </article>
+          </div>
+        </section>
+
+        <section class="start-brief" aria-labelledby="brief-title">
+          <header class="start-section-head"><div><p class="start-eyebrow">GENERATION BRIEF</p><h2 id="brief-title">生成简报</h2></div><span class="start-step-badge">02 · 组装输入</span></header>
+
+          <div class="start-template-row">
+            <label><span>提示词模板</span><select data-template-select><option value="digital-set">3C 数码类主图与详情页 · v3</option><option value="general-set">全平台主图详情页通用 · v2</option><option value="digital-main">3C 数码类主图 · v4</option></select></label>
+            <div><span>模板来源</span><strong>团队已发布版本</strong><small>任务内修改不会覆盖公共模板</small></div>
+          </div>
+
+          <div class="start-inputs-head"><div><strong>本次设计要求</strong><span>字段随模板变化，可手动填写或从已选资料自动带入。</span></div><button type="button" data-autofill><svg><use href="assets/icons.svg#sparkles"></use></svg>从资料自动填写</button></div>
+          <div class="start-dynamic-fields" data-dynamic-fields></div>
+
+          <section class="start-rag" aria-labelledby="rag-title">
+            <div class="start-rag-head"><div><p class="start-eyebrow">RAG REFERENCES</p><h3 id="rag-title">商品资料检索</h3><span>只引用已发布的事实和原图资料。</span></div><span class="start-selection-count" data-selection-count>已选 2 条</span></div>
+            <label class="start-search"><svg><use href="assets/icons.svg#zoom-in"></use></svg><input type="search" placeholder="搜索卖点、参数或使用场景" data-chunk-search></label>
+            <div class="start-chunk-list" data-chunk-list>
+              <label class="start-chunk selected" data-chunk data-search-text="65W 三口 USB-C USB-A 功率参数"><input type="checkbox" checked><span><strong>65W 三口快充参数</strong><small>商品事实 · B-018 · 接口与功率</small><p>USB-C ×2、USB-A ×1；单口最高输出 65W。</p></span><em>已发布</em></label>
+              <label class="start-chunk selected" data-chunk data-search-text="办公桌 笔记本 手机 平板 使用场景"><input type="checkbox" checked><span><strong>办公桌多设备场景</strong><small>场景资料 · B-024 · 日本站</small><p>适用于笔记本、平板和手机同时补能的桌面场景。</p></span><em>已发布</em></label>
+              <label class="start-chunk" data-chunk data-search-text="GaN 轻巧 出差 便携 卖点"><input type="checkbox"><span><strong>GaN 便携卖点</strong><small>商品事实 · B-021 · 产品优势</small><p>小体积设计，适合办公与旅行携带。</p></span><em>已发布</em></label>
+            </div>
+          </section>
+
+          <footer class="start-brief-footer"><div><span>准备状态</span><strong><b></b>底图、模板和资料已就绪</strong></div><a class="start-primary" href="picagent-suite-workbench.html">开始生成套图<svg><use href="assets/icons.svg#arrow-right"></use></svg></a></footer>
+        </section>
+      </section>
+
+      <section class="start-recents" aria-labelledby="recent-title">
+        <header><div><p class="start-eyebrow">RECENT PROJECTS</p><h2 id="recent-title">最近项目</h2><p>继续处理最近创建的套图任务。</p></div><a href="picagent-task-center.html">查看全部任务<svg><use href="assets/icons.svg#arrow-right"></use></svg></a></header>
+        <div class="start-project-grid">
+          <article><img src="assets/tokyo-desk-v3.jpg" alt="GAN65-BK 日本站办公场景"><div><span class="start-project-state active">创作中</span><h3>GAN65-BK · 日本站主图套组</h3><p>4 张图片 · 更新于 12 分钟前</p><a href="picagent-suite-workbench.html">继续创作</a></div></article>
+          <article><img src="assets/gan65-product.jpg" alt="GAN65-BK 美国站白底图"><div><span class="start-project-state">草稿</span><h3>GAN65-BK · 美国站详情页</h3><p>模板和资料已选择 · 昨天</p><button type="button" data-resume-reserved>打开草稿</button></div></article>
+          <article class="start-new-project"><span><svg><use href="assets/icons.svg#sparkles"></use></svg></span><div><h3>创建新的套图</h3><p>从商品实拍图开始新的设计任务。</p><button type="button" data-new-project>新建套图</button></div></article>
+        </div>
+      </section>
+    </main>
+  </div>
+  <input type="file" accept="image/*" hidden data-file-input>
+  <div class="start-toast" role="status" aria-live="polite" data-toast></div>
+  <script src="assets/suite-start.js"></script>
+</body>
+</html>

@@ -1,0 +1,2 @@
+ALTER TABLE suite_workbench.generation_attempts
+  DROP CONSTRAINT IF EXISTS generation_attempts_input_image_id_version_number_key;

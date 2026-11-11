@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:,">
+  <title>爆品图反推 · PicAgent 原型</title>
+  <link rel="stylesheet" href="assets/product-reverse.css">
+</head>
+<body>
+  <div class="reverse-shell">
+    <header class="reverse-topbar">
+      <a class="reverse-brand" href="index.html" aria-label="返回 PicAgent 原型入口"><span class="reverse-brand-mark">PA</span><strong>PicAgent</strong></a>
+      <div class="reverse-breadcrumb"><span>内部图片生产</span><i>/</i><strong>爆品图反推</strong></div>
+      <div class="reverse-top-actions"><span class="reverse-status"><b></b>方案草稿已保存</span><button class="reverse-avatar" type="button" aria-label="当前用户沈">沈</button></div>
+    </header>
+    <div class="reverse-layout">
+      <aside class="reverse-panel left">
+        <div class="reverse-panel-scroll">
+          <div class="reverse-panel-head"><h1>爆品图反推</h1><p>从爆品参考图提炼可复用的构图、风格和信息排版提示词。</p></div>
+          <div class="reverse-step-list" aria-label="反推流程"><div class="reverse-step active"><span>1</span><strong>上传参考图</strong></div><div class="reverse-step active"><span>2</span><strong>选择反推模板</strong></div><div class="reverse-step"><span>3</span><strong>编辑提示词</strong></div><div class="reverse-step"><span>4</span><strong>进入共享画布</strong></div></div>
+          <section class="reverse-left-section"><div class="reverse-section-label"><strong>反推类型</strong><span>二选一</span></div><div class="reverse-tabs" role="tablist" aria-label="反推类型"><button class="active" type="button" data-mode="main" role="tab" aria-selected="true">主图反推</button><button type="button" data-mode="detail" role="tab" aria-selected="false">详情图反推</button></div><p class="reverse-mode-note" data-mode-note>每张参考主图独立提炼版式、信息层级和商业转化结构。</p></section>
+          <section class="reverse-left-section"><div class="reverse-section-label"><strong>批量操作</strong><span>最多 16 张</span></div><div class="reverse-batch-actions"><button class="reverse-btn primary" type="button" data-reverse-all><svg><use href="assets/icons.svg#sparkles"></use></svg>批量反推提示词</button><button class="reverse-btn" type="button" data-save-all><svg><use href="assets/icons.svg#save"></use></svg>保存当前方案</button><button class="reverse-btn quiet" type="button" data-enter-canvas>进入共享画布</button></div><small class="reverse-limit">每张图片独立生成一条提示词。详情图默认以第 1 张图建立系列色彩基准。</small></section>
+        </div>
+      </aside>
+      <main class="reverse-main">
+        <header class="reverse-main-head"><div><h2 data-mode-title>主图反推</h2><p>上传爆品参考图，再为每张图选择对应的反推模板。</p></div><div class="reverse-counter" data-counter><strong>4</strong> 张参考图 · <strong>0</strong> 条提示词</div></header>
+        <div class="reverse-content">
+          <label class="reverse-dropzone" data-dropzone><input data-file-input type="file" accept="image/jpeg,image/png,image/webp" multiple><svg><use href="assets/icons.svg#upload"></use></svg><strong>拖拽爆品参考图到这里，或点击选择文件</strong><span>支持 JPG、PNG、WebP · 单次最多 16 张 · 仅用于提炼视觉结构</span></label>
+          <div class="reverse-reference-head"><h3>参考图列表</h3><span>点击图片查看对应提示词 · 可删除参考图</span></div>
+          <section class="reverse-image-grid" data-image-grid aria-label="爆品参考图列表"></section>
+        </div>
+      </main>
+      <aside class="reverse-panel right">
+        <div class="reverse-panel-scroll">
+          <div class="reverse-right-head"><h2>提示词</h2><p>选中一张参考图后，查看并编辑它独立生成的提示词。</p></div>
+          <div class="reverse-inspector" data-inspector></div>
+          <section class="reverse-next"><strong>下一步：共享生图画布</strong><p>后续从图片资源库选择产品白底图，再把参考图和提示词映射到共用 XYFlow 画布。</p><button class="reverse-btn primary" type="button" data-enter-canvas>带入已生成提示词</button></section>
+        </div>
+      </aside>
+    </div>
+    <div class="reverse-toast" data-toast role="status" aria-live="polite"></div>
+  </div>
+  <script src="assets/product-reverse.js"></script>
+</body>
+</html>

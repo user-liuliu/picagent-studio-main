@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:,">
+  <title>风格库 · PicAgent 原型</title>
+  <link rel="stylesheet" href="assets/picagent.css">
+  <link rel="stylesheet" href="assets/suite-workbench.css">
+  <style>
+    body { min-width: 0; overflow: hidden; background: #f8fafb; color: var(--suite-ink); font-family: Inter, "Noto Sans SC", "Microsoft YaHei", sans-serif; }
+    .app-shell { min-width: 0; min-height: 100vh; background: #f8fafb; }
+    .topbar { height: 68px; grid-template-columns: 250px minmax(0,1fr) auto; padding: 0 28px; background: rgba(255,255,255,.94); border-bottom-color: var(--suite-line); }
+    .brand-mark { height: 68px; display: flex; align-items: center; justify-content: flex-start; gap: 10px; border-right: 0; }
+    .brand-mark::after { content: "PicAgent"; color: var(--suite-ink); font-size: 15px; font-weight: 700; }
+    .brand-glyph { width: 30px; height: 30px; border-radius: 9px; background: var(--suite-yellow); color: #10151e; }
+    .topbar-main { padding: 0; }
+    .breadcrumb { font-size: 13px; }
+    .breadcrumb strong { color: var(--suite-ink); }
+    .topbar-actions { height: 68px; padding: 0; gap: 18px; }
+    .top-status { color: var(--suite-muted); font-size: 12px; }
+    .status-dot.pass { background: var(--suite-green); }
+    .topbar-actions .btn-ghost { color: var(--suite-ink); font-size: 11px; }
+    .topbar-actions .btn-ghost:hover { background: #f5f7f9; }
+    .sidenav { inset: 68px auto 0 0; width: 82px; padding: 18px 10px; gap: 7px; border-right-color: var(--suite-line); }
+    .nav-item { width: 58px; min-height: 56px; border-radius: 10px; color: #8893a3; }
+    .nav-item.active { background: #fff8dc; color: #a26f00; }
+    .nav-item:hover { background: #f5f7f9; color: var(--suite-ink); }
+    .workarea { inset: 68px 0 0 82px; background: #f8fafb; }
+    .panel, .styles-center { background: #fff; border-color: var(--suite-line); }
+    .panel-header { height: 58px; padding-inline: 18px; border-bottom-color: var(--suite-line); }
+    .panel-title { color: var(--suite-ink); }
+    .panel-subtitle, .style-filter-group h3, .style-filter-field > span { color: var(--suite-muted); }
+    .styles-center { grid-template-rows: 58px 42px auto minmax(0,1fr); }
+    .style-catalog-toolbar { gap: 14px; }
+    .style-catalog-toolbar > input { flex: 1; min-width: 180px; height: 38px; padding: 0 12px; border: 1px solid var(--suite-line); border-radius: 8px; background: #fbfcfd; color: var(--suite-ink); }
+    .style-catalog-toolbar > input:focus { border-color: #7ca5df; background: #fff; outline: 2px solid rgba(60,117,214,.16); outline-offset: 1px; }
+    .btn { min-height: 36px; border-radius: 8px; border-color: var(--suite-line); }
+    .btn-primary { background: var(--suite-orange); border-color: var(--suite-orange); color: #fff; }
+    .btn-primary:hover { background: #d96d28; border-color: #d96d28; }
+    .tabs { padding-inline: 18px; border-bottom-color: var(--suite-line); }
+    .tab { color: var(--suite-muted); }
+    .tab.active { color: var(--suite-ink); }
+    .tab.active::after { background: var(--suite-orange); }
+    .style-boundary { padding-inline: 18px; border-bottom-color: var(--suite-line); }
+    .style-grid { padding: 16px 18px 22px; gap: 12px; background: #fff; }
+    .style-card { border-color: var(--suite-line); border-radius: 11px; box-shadow: 0 7px 16px rgba(39,54,73,.05); }
+    .style-card:hover { border-color: #9eb9e8; box-shadow: 0 12px 22px rgba(39,54,73,.1); }
+    .style-card.active { border: 2px solid #356fd2; box-shadow: 0 0 0 3px rgba(53,111,210,.12); }
+    .style-image { background: #f4f6f8; }
+    .style-image img { object-fit: contain; padding: 10px; }
+    .resource-card-generated .style-image img, .resource-card-final .style-image img { object-fit: cover; padding: 0; }
+    .style-card-body { padding: 11px; }
+    .style-card-title { color: var(--suite-ink); font-size: 12px; }
+    .style-card-summary, .style-card-meta { color: var(--suite-muted); }
+    .badge { border-color: var(--suite-line); border-radius: 5px; }
+    .badge.pass { color: var(--suite-green); border-color: #b8ddcb; background: #eef9f3; }
+    .style-filter-panel .panel-scroll { background: #fff; }
+    .style-filters { padding: 10px 16px 18px; }
+    .style-filter-group { padding: 13px 0; border-bottom-color: var(--suite-line); }
+    .style-check, .resource-type-grid label { color: #667286; }
+    .style-filter-note { border-left-color: var(--suite-orange); background: #fffaf4; }
+    .style-filter-note svg { color: var(--suite-orange); }
+    .style-inspector .inspector-body { background: #fff; }
+    .style-detail-image { height: 206px; background: #f4f6f8; border-bottom-color: var(--suite-line); }
+    .style-detail-image img { object-fit: contain; padding: 16px; }
+    .style-overview h2 { color: var(--suite-ink); font-size: 15px; }
+    .style-overview [data-style-summary], .style-scope-note { color: var(--suite-muted); }
+    .resource-usage { border-left-color: var(--suite-orange); background: #fffaf4; }
+    .resource-selection { border-color: #b8ddcb; background: #eef9f3; }
+    .resource-selection svg { color: var(--suite-green); }
+    .inspector-actions { background: #fbfcfd; border-top-color: var(--suite-line); }
+    .inspector-actions .btn-primary { background: var(--suite-orange); border-color: var(--suite-orange); }
+    .resource-type-grid { display:grid; gap:4px; }
+    .resource-type-grid label { min-height:30px; display:flex; align-items:center; gap:8px; font-size:11px; }
+    .resource-type-grid input { accent-color:var(--accent); }
+    .resource-card-template .style-image { display:grid; place-items:center; background:linear-gradient(135deg, #fff8dc, #f4f6f8); }
+    .resource-card-template .style-image strong { padding:12px; color:#a26f00; font:700 12px/1.35 var(--font-display); text-align:center; }
+    .resource-card-template .style-image span { position:absolute; bottom:10px; left:10px; color:var(--muted); font:9px var(--font-mono); }
+    .resource-card-meta { margin-top:7px; display:flex; flex-wrap:wrap; gap:4px; }
+    .resource-card-meta .badge { font-size:9px; }
+    .prompt-linked { color:var(--suite-green); font-size:9px; }
+    .prompt-unlinked { color:#a16d00; font-size:9px; }
+    .resource-prompt-meta { display:flex; align-items:center; flex-wrap:wrap; gap:6px; margin-bottom:8px; }
+    .resource-prompt { max-height:190px; margin:0; padding:10px; overflow:auto; white-space:pre-wrap; border:1px solid var(--suite-line); border-radius:8px; background:#fbfcfd; color:#4f5b6a; font:10px/1.55 var(--font-body); }
+    .resource-prompt-empty { padding:10px; border-left:2px solid #abb7c6; background:#f5f7f9; color:var(--suite-muted); }
+    .resource-prompt-empty strong { display:block; color:#596678; font-size:10px; }
+    .resource-prompt-empty p { margin-top:4px; font-size:10px; line-height:1.45; }
+    .style-inspector .inspector-section h3 { color:var(--suite-ink); }
+    .resource-usage { margin-top:10px; padding:9px; border-left:2px solid var(--accent); background:color-mix(in oklch,var(--accent) 4%,var(--surface)); color:var(--muted); font-size:10px; line-height:1.5; }
+    .resource-usage strong { color:var(--fg); }
+    .resource-selection { margin:0 14px 14px; padding:10px; display:flex; align-items:flex-start; gap:8px; border:1px solid color-mix(in oklch,var(--trust) 28%,var(--border)); background:color-mix(in oklch,var(--trust) 4%,var(--surface)); color:var(--muted); font-size:10px; }
+    .resource-selection svg { width:14px; height:14px; flex:0 0 auto; color:var(--trust); }
+    .resource-selection strong { display:block; color:var(--fg); }
+    .style-inspector .inspector-actions { position:sticky; bottom:0; }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand-mark" href="index.html" aria-label="返回原型入口"><span class="brand-glyph">PA</span></a>
+      <div class="topbar-main"><div class="breadcrumb"><span>PicAgent</span><span class="crumb-sep">/</span><strong>风格库</strong></div></div>
+      <div class="topbar-actions style-top-actions">
+        <span class="top-status"><span class="status-dot pass"></span>工作台资源已同步</span>
+        <a class="btn btn-ghost" href="picagent-suite-workbench.html"><svg><use href="assets/icons.svg#arrow-left"></use></svg>返回工作台</a>
+        <button class="icon-btn" type="button" aria-label="当前用户沈">沈</button>
+      </div>
+    </header>
+
+    <aside class="sidenav" aria-label="主导航">
+      <a class="nav-item" href="picagent-suite-start.html"><svg><use href="assets/icons.svg#sparkles"></use></svg><span>创建</span></a>
+      <a class="nav-item" href="picagent-task-center.html"><svg><use href="assets/icons.svg#tasks"></use></svg><span>任务</span></a>
+      <a class="nav-item active" href="picagent-style-library.html" aria-current="page"><svg><use href="assets/icons.svg#library"></use></svg><span>风格库</span></a>
+      <span class="nav-spacer"></span>
+      <a class="nav-item" href="index.html"><svg><use href="assets/icons.svg#arrow-left"></use></svg><span>原型页</span></a>
+    </aside>
+
+    <main class="workarea styles-layout">
+      <section class="panel style-filter-panel">
+        <header class="panel-header"><div><strong class="panel-title">资源筛选</strong><div class="panel-subtitle">只显示工作台可引用资源</div></div><span class="badge">13 项</span></header>
+        <div class="panel-scroll">
+          <div class="style-filters">
+            <div class="style-filter-group"><h3>资源类型</h3><div class="resource-type-grid">
+              <label><input type="checkbox" checked data-type-filter="all">全部资源 <small class="filter-count">13</small></label>
+              <label><input type="checkbox" data-type-filter="original">商品实拍原图 <small class="filter-count">3</small></label>
+              <label><input type="checkbox" data-type-filter="base">白底底图 <small class="filter-count">2</small></label>
+              <label><input type="checkbox" data-type-filter="generated">AI 生成结果 <small class="filter-count">3</small></label>
+              <label><input type="checkbox" data-type-filter="process">过程图 <small class="filter-count">2</small></label>
+              <label><input type="checkbox" data-type-filter="final">终版图 <small class="filter-count">2</small></label>
+              <label><input type="checkbox" data-type-filter="reverse">爆品图反推 <small class="filter-count">1</small></label>
+            </div></div>
+            <div class="style-filter-group"><h3>状态</h3><label class="style-check"><input type="checkbox" checked>已发布 <small>10</small></label><label class="style-check"><input type="checkbox">草稿 <small>2</small></label><label class="style-check"><input type="checkbox">已下线 <small>0</small></label></div>
+            <div class="style-filter-group"><h3>适用平台</h3><label class="style-check"><input type="checkbox">Amazon <small>6</small></label><label class="style-check"><input type="checkbox">Shopify / 独立站 <small>4</small></label><label class="style-check"><input type="checkbox">通用 <small>8</small></label></div>
+            <div class="style-filter-group"><h3>适用品类</h3><label class="style-check"><input type="checkbox">3C 数码 <small>5</small></label><label class="style-check"><input type="checkbox">百货杯壶 <small>3</small></label><label class="style-check"><input type="checkbox">通用品类 <small>9</small></label></div>
+            <div class="style-filter-note"><svg><use href="assets/icons.svg#library"></use></svg><p>图片资源可以来自商品生产链路，也可以作为模板示例。历史引用保留快照，不覆盖原文件。</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="styles-center">
+        <header class="panel-header style-catalog-toolbar"><div><strong class="panel-title">风格库</strong><div class="panel-subtitle">工作台内资源库 · 提示词模板与图片资产</div></div><button class="btn btn-primary" type="button" data-upload><svg><use href="assets/icons.svg#sparkles"></use></svg><span data-upload-label>上传图片资产</span></button></header>
+        <div class="tabs style-scope-tabs" role="tablist" aria-label="资源类型"><button class="tab active" type="button" data-tab="images" role="tab" aria-selected="true">图片资产 <span class="tab-count">13</span></button><button class="tab" type="button" data-tab="templates" role="tab" aria-selected="false">提示词模板 <span class="tab-count">5</span></button></div>
+        <div class="style-boundary"><strong>当前范围</strong><span data-boundary>维护生成图片资产和爆品图反推结果；除实拍原图外，每张图片必须有对应提示词。</span><span class="badge pass">工作台内使用</span></div>
+        <div class="style-results"><div class="style-grid" data-resource-grid></div><div class="style-empty" data-empty hidden><div class="style-empty-mark"><svg><use href="assets/icons.svg#library"></use></svg></div><strong>没有匹配的资源</strong><p>可以调整搜索词或左侧资源类型筛选。</p></div></div>
+      </section>
+
+      <aside class="panel right style-inspector">
+        <header class="panel-header"><div><strong class="panel-title">资源详情</strong><div class="panel-subtitle">查看引用范围和版本信息</div></div><button class="icon-btn" type="button" aria-label="关闭详情"><svg><use href="assets/icons.svg#x"></use></svg></button></header>
+        <div class="inspector-body">
+          <figure class="style-detail-image"><img data-detail-image src="assets/gan65-product-tight.jpg" alt="商品实拍原图预览"></figure>
+          <section class="inspector-section style-overview"><span class="badge pass" data-detail-status>已发布</span><h2 data-detail-title>GAN65-BK 商品实拍原图</h2><p data-detail-summary>商品主体、接口结构和真实颜色的原始依据。</p><div class="resource-card-meta" data-detail-tags><span class="badge">商品实拍原图</span><span class="badge">3C 数码</span><span class="badge">通用</span></div><div class="resource-usage"><strong>建议用法</strong><br><span data-detail-usage>可作为白底精修、计划生成和单卡生图的输入依据。</span></div></section>
+          <section class="inspector-section"><h3>资源信息</h3><dl class="definition-list"><dt>资源 ID</dt><dd class="mono" data-detail-id>asset-original-001</dd><dt>版本</dt><dd data-detail-version>V1 · 2026-08-23</dd><dt>文件</dt><dd data-detail-file>gan65-product-tight.jpg</dd><dt>引用次数</dt><dd data-detail-refs>12 次</dd><dt>对象存储</dt><dd class="mono">MinIO / suites-assets</dd></dl></section>
+          <section class="inspector-section"><h3>提示词</h3><div class="resource-prompt-empty" data-prompt-empty hidden><strong>原始输入图不适用生成提示词</strong><p>实拍原图只作为商品事实和外观依据保存。</p></div><div data-prompt-panel><div class="resource-prompt-meta"><span class="badge" data-prompt-template>通用白底精修 · v2</span><span class="badge pass">已关联</span></div><pre class="resource-prompt" data-prompt-text></pre></div></section>
+          <section class="inspector-section"><h3>引用关系</h3><div class="evidence-thread"><span class="evidence-id">输入图</span><span></span><span class="version-id">底图精修</span><span></span><span class="evidence-id">图片计划</span></div><p class="style-scope-note">选择后只把资源 ID、版本、对象快照和提示词快照带入当前工作台请求；不会覆盖已有核心提示词。</p></section>
+          <div class="resource-selection"><svg><use href="assets/icons.svg#sparkles"></use></svg><div><strong>选择不会立即生成图片</strong><span>先加入当前请求的参考资源，提交生成时再冻结引用。</span></div></div>
+        </div>
+        <div class="inspector-actions"><button class="btn btn-primary" type="button" data-select-resource>选择资源</button><button class="btn" type="button" data-preview-resource>打开预览</button><button class="btn btn-ghost" type="button" data-manage-resource>进入资源管理</button></div>
+      </aside>
+    </main>
+  </div>
+  <div class="dialog-backdrop" data-toast-backdrop><section class="prototype-dialog" role="dialog" aria-modal="true"><header class="dialog-head"><strong data-toast-title>提示</strong><button class="icon-btn" type="button" data-close-toast aria-label="关闭"><svg><use href="assets/icons.svg#x"></use></svg></button></header><div class="dialog-body"><p data-toast-message>操作已完成。</p></div><footer class="dialog-footer"><button class="btn btn-primary" type="button" data-close-toast>知道了</button></footer></section></div>
+  <script src="assets/style-library.js"></script>
+</body>
+</html>

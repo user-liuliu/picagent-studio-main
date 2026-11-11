@@ -1,0 +1,44 @@
+{
+  "name": "picagent-suite-workbench",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "api": "tsx server/index.ts",
+    "import-prompts": "tsx server/import-prompts.ts",
+    "seed:validation-rag": "tsx server/seed-validation-rag.ts",
+    "test:ticket05": "tsx --test tests/ticket05.contract.test.ts tests/ticket05.input.test.ts",
+    "test:ticket02": "tsx --test tests/ticket02.contract.test.ts tests/ticket02.encoding.test.ts",
+    "build": "tsc -b && vite build",
+    "typecheck": "tsc -b --pretty false"
+  },
+  "dependencies": {
+    "@langfuse/otel": "^5.11.0",
+    "@langfuse/tracing": "^5.11.0",
+    "@opentelemetry/api": "^1.9.0",
+    "@opentelemetry/exporter-prometheus": "^0.206.0",
+    "@opentelemetry/sdk-metrics": "^2.0.1",
+    "@opentelemetry/sdk-trace-node": "^2.0.1",
+    "@xyflow/react": "^12.11.3",
+    "dotenv": "^17.4.2",
+    "konva": "^10.3.2",
+    "minio": "^8.0.7",
+    "pg": "^8.23.0",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "react-konva": "^19.2.5",
+    "sharp": "^0.35.3"
+  },
+  "devDependencies": {
+    "@types/node": "^26.2.0",
+    "@types/pg": "^8.23.1",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.4",
+    "@vitejs/plugin-react": "^6.1.0",
+    "playwright": "^1.62.1",
+    "tsx": "^4.23.12",
+    "typescript": "^7.0.2",
+    "vite": "^8.2.2"
+  }
+}

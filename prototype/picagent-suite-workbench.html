@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:,">
+  <title>套图工作台 · PicAgent</title>
+  <link rel="stylesheet" href="assets/picagent.css">
+  <link rel="stylesheet" href="assets/suite-workbench.css">
+</head>
+<body>
+  <div class="suite-shell">
+    <header class="suite-topbar">
+      <a class="suite-brand" href="index.html" aria-label="返回 PicAgent 原型入口"><span>PA</span><strong>PicAgent</strong></a>
+      <div class="suite-breadcrumb"><a href="picagent-suite-start.html">套图创建</a><i>/</i><strong>GAN65-BK 商品图套组</strong></div>
+      <div class="suite-mode-switch" role="tablist" aria-label="工作台模式">
+        <button class="active" type="button" data-mode="compose" role="tab" aria-selected="true">创作板</button>
+        <button type="button" data-mode="gallery" role="tab" aria-selected="false">成品展示板</button>
+      </div>
+      <div class="suite-top-actions"><span class="suite-status"><b></b> 草稿已保存</span><button class="suite-avatar" type="button">沈</button></div>
+    </header>
+
+    <aside class="suite-sidebar" aria-label="工作台导航">
+      <a class="suite-nav active" href="picagent-suite-workbench.html"><svg><use href="assets/icons.svg#editor"></use></svg><span>工作台</span></a>
+      <a class="suite-nav" href="picagent-style-library.html"><svg><use href="assets/icons.svg#library"></use></svg><span>风格库</span></a>
+      <a class="suite-nav" href="picagent-task-center.html"><svg><use href="assets/icons.svg#tasks"></use></svg><span>任务</span></a>
+      <span class="suite-nav-spacer"></span>
+      <a class="suite-nav" href="index.html"><svg><use href="assets/icons.svg#arrow-left"></use></svg><span>返回</span></a>
+    </aside>
+
+    <main class="suite-main">
+      <section class="suite-heading">
+        <div>
+          <p class="suite-eyebrow">IMAGE SET · 03</p>
+          <h1>创作板</h1>
+          <p>调整当前提示词和生成参数，创建新的套图结果。</p>
+        </div>
+        <div class="suite-heading-meta"><span>产品</span><strong>GAN65-BK</strong><span>模板</span><strong>全平台主图 · v2</strong></div>
+      </section>
+
+      <section class="suite-workspace compose-mode" data-workspace aria-label="套图工作台">
+        <div class="suite-canvas-wrap">
+          <div class="suite-canvas-toolbar">
+            <div><strong>画布预览</strong><span>4 张图片 · 1:1 · 1024 × 1024</span></div>
+            <div class="suite-canvas-actions" aria-label="画布操作">
+              <button class="suite-canvas-action" type="button" data-canvas-action="download" title="下载图片"><svg><use href="assets/icons.svg#download"></use></svg><span>下载</span></button>
+              <button class="suite-canvas-icon" type="button" data-canvas-action="undo" aria-label="撤销" title="撤销"><svg><use href="assets/icons.svg#undo"></use></svg></button>
+              <button class="suite-canvas-icon" type="button" data-canvas-action="redo" aria-label="重做" title="重做"><svg><use href="assets/icons.svg#arrow-right"></use></svg></button>
+              <button class="suite-canvas-icon" type="button" data-canvas-action="zoom-out" aria-label="缩小" title="缩小"><svg><use href="assets/icons.svg#zoom-out"></use></svg></button>
+              <span class="suite-zoom-value" data-zoom-value>100%</span>
+              <button class="suite-canvas-icon" type="button" data-canvas-action="zoom-in" aria-label="放大" title="放大"><svg><use href="assets/icons.svg#zoom-in"></use></svg></button>
+              <button class="suite-canvas-action" type="button" data-canvas-action="fit" title="适应画布"><svg><use href="assets/icons.svg#fit"></use></svg><span>适应</span></button>
+            </div>
+          </div>
+          <div class="suite-canvas" data-canvas>
+            <div class="suite-canvas-content" data-canvas-content>
+              <svg class="suite-edges" aria-hidden="true" viewBox="0 0 1000 690" preserveAspectRatio="none">
+                <path d="M235 170 C340 170 355 175 430 220"></path><path d="M235 360 C340 360 355 310 430 280"></path>
+              </svg>
+              <article class="suite-node suite-source-node">
+                <div class="suite-node-kicker"><span>SOURCE ASSET</span><em>已引用</em></div>
+                <img src="assets/gan65-product-tight.jpg" alt="GAN65-BK 原始产品图">
+                <strong>原始实拍图</strong><small>1 张 · 商品主体已锁定</small>
+              </article>
+              <article class="suite-node suite-base-node">
+                <div class="suite-node-kicker"><span>CLEAN BASE</span><em class="success">完成</em></div>
+                <img src="assets/gan65-product.jpg" alt="GAN65-BK 精修白底图">
+                <strong>精修白底图</strong><small>1 张 · 可作为全部卡片参考</small>
+              </article>
+              <div class="suite-card-grid" data-card-grid></div>
+            </div>
+          </div>
+        </div>
+        <aside class="suite-creation-rail" data-creation-rail aria-label="创作参数">
+          <div class="suite-rail-head"><div><p class="suite-eyebrow">CREATE BOARD</p><h2>继续创作</h2></div><span class="suite-rail-status"><b></b>可编辑</span></div>
+          <div class="suite-rail-body">
+            <label class="suite-rail-select"><span>当前模式</span><select data-creative-mode><option>套图生成</option><option>主图生成</option><option>详情页生成</option></select></label>
+            <div class="suite-rail-assets"><div class="suite-rail-asset-strip"><img src="assets/gan65-product-tight.jpg" alt="原始实拍图"><img src="assets/gan65-product.jpg" alt="精修白底图"><button type="button" data-add-asset aria-label="添加参考图" title="添加参考图">+</button></div><span>已引用 2 张参考图</span></div>
+            <label class="suite-rail-field"><span>提示词</span><textarea data-creative-prompt spellcheck="false">保留 GAN65-BK 产品真实外观与接口结构，白色纯净背景，突出 65W 三口快充卖点，商业电商摄影，柔和棚拍光线，无额外文字。</textarea></label>
+            <div class="suite-rail-params">
+              <label><span>模型</span><select data-creative-model><option>三万蕉 2</option><option>三万蕉 Pro</option><option>三万图 2</option><option>Gemini Image</option></select></label>
+              <label><span>比例</span><select data-creative-ratio><option>1:1</option><option>3:4</option><option>4:3</option><option>9:16</option><option>16:9</option></select></label>
+              <label><span>尺寸</span><select data-creative-size><option>1K</option><option>2K</option></select></label>
+            </div>
+          </div>
+          <div class="suite-rail-footer"><button class="suite-resource-button" type="button" data-open-library><svg><use href="assets/icons.svg#library"></use></svg><span>资源库<small>提示词卡与风格库</small></span></button><button class="suite-create-btn" type="button" data-create>创建</button></div>
+        </aside>
+
+      </section>
+    </main>
+  </div>
+  <dialog class="suite-preview-dialog" data-preview-dialog aria-labelledby="preview-dialog-title">
+    <div class="suite-preview-panel">
+      <header class="suite-dialog-head"><div><p class="suite-eyebrow">GENERATED PREVIEW</p><h2 id="preview-dialog-title" data-preview-title>图片预览</h2><p data-preview-subtitle></p></div><button class="suite-icon-btn" type="button" data-close-preview aria-label="关闭图片预览" title="关闭"><svg><use href="assets/icons.svg#x"></use></svg></button></header>
+      <div class="suite-preview-body"><img data-preview-image alt="生成结果预览"></div>
+    </div>
+  </dialog>
+  <dialog class="suite-dialog" data-card-dialog aria-labelledby="suite-dialog-title">
+    <form class="suite-dialog-panel" method="dialog">
+      <header class="suite-dialog-head">
+        <div><p class="suite-eyebrow">IMAGE CARD</p><h2 id="suite-dialog-title" data-dialog-title>编辑卡片</h2><p data-dialog-subtitle></p></div>
+        <button class="suite-icon-btn" type="button" data-close-dialog aria-label="关闭编辑卡片" title="关闭"><svg><use href="assets/icons.svg#x"></use></svg></button>
+      </header>
+      <div class="suite-dialog-body" data-dialog-body></div>
+      <footer class="suite-dialog-actions">
+        <button class="suite-btn danger" type="button" data-delete>删除卡片</button>
+        <span></span>
+        <button class="suite-btn secondary" type="button" data-cancel>取消</button>
+        <button class="suite-btn secondary" type="button" data-regenerate>重新生成</button>
+        <button class="suite-btn primary" type="button" data-save>保存修改</button>
+      </footer>
+    </form>
+  </dialog>
+  <dialog class="suite-prompt-dialog" data-library aria-labelledby="library-title">
+    <div class="suite-prompt-dialog-panel">
+      <header class="suite-dialog-head"><div><p class="suite-eyebrow">RESOURCE LIBRARY</p><h2 id="library-title">资源库</h2><p data-library-description>选择模板后复制到当前提示词，不会覆盖已生成卡片。</p></div><button class="suite-icon-btn" type="button" data-close-library aria-label="关闭资源库"><svg><use href="assets/icons.svg#x"></use></svg></button></header>
+      <div class="suite-library-switch" role="tablist" aria-label="资源类型"><button class="active" type="button" data-library-tab="prompts" role="tab" aria-selected="true">提示词卡</button><button type="button" data-library-tab="styles" role="tab" aria-selected="false">风格库</button></div>
+      <div class="suite-library-tools" data-prompt-tools><input type="search" placeholder="搜索标题、标签或提示词" data-prompt-search><div class="suite-library-tabs"><button class="active" type="button" data-prompt-filter="全部">全部</button><button type="button" data-prompt-filter="白底">白底</button><button type="button" data-prompt-filter="主图">主图</button><button type="button" data-prompt-filter="详情页">详情页</button><button type="button" data-prompt-filter="我的">我的</button></div></div>
+      <div class="suite-library-tools" data-style-tools hidden><input type="search" placeholder="搜索风格名称或标签" data-style-search><div class="suite-library-tabs"><button class="active" type="button" data-style-filter="全部">全部</button><button type="button" data-style-filter="电商">电商</button><button type="button" data-style-filter="场景">场景</button><button type="button" data-style-filter="3C">3C</button></div></div>
+      <div class="suite-prompt-list" data-prompt-list></div>
+      <div class="suite-prompt-list" data-style-list hidden></div>
+    </div>
+  </dialog>
+  <dialog class="suite-confirm-dialog" data-delete-dialog aria-labelledby="delete-dialog-title">
+    <form method="dialog">
+      <h2 id="delete-dialog-title">删除这张卡片？</h2>
+      <p>卡片及当前提示词会从本次套图中移除，其他卡片不受影响。</p>
+      <div><button class="suite-btn secondary" value="cancel">取消</button><button class="suite-btn danger solid" type="button" data-confirm-delete>确认删除</button></div>
+    </form>
+  </dialog>
+  <div class="suite-toast" role="status" aria-live="polite" data-toast></div>
+  <script src="assets/suite-workbench.js"></script>
+</body>
+</html>
